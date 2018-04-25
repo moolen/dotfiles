@@ -1,0 +1,28 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FILES="$HOME/.localrc $HOME/.ssh $HOME/.gnupg $HOME/.zsh_history $HOME/.config/Code $HOME/Bilder $HOME/.npmrc $HOME/.docker $HOME/.kube /etc/netctl /etc/ansible /etc/asound.conf $HOME/bin/backup_archive_hook $BACKUP_DIRS"
+ARCHIVE=$(hostname).tar
+
+if [ "$BACKUP_GPG_RECIPIENT" == "" ] || [ "$BACKUP_GDRIVE_DIR_ID" == "" ]; then
+  echo missing required ENV VARS: \$BACKUP_GPG_RECIPIENT \$BACKUP_GDRIVE_DIR_ID
+  echo aborting
+  exit 1
+fi
+
+if [ -f $HOME/.config/Code ]; then
+  rm -rf $HOME/.config/Code/Cache
+  rm -rf $HOME/.config/Code/CachedData
+fi
+
+sudo tar -cvzf $ARCHIVE $FILES
+gpg --encrypt --recipient $BACKUP_GPG_RECIPIENT $ARCHIVE
+
+if [ $(which backup_archive_hook) ]; then
+  backup_archive_hook $DIR/$ARCHIVE.gpg
+fi
+
+gdrive upload -p $BACKUP_GDRIVE_DIR_ID $ARCHIVE.gpg
+
+echo "cleaning up.."
+rm -f $ARCHIVE.gpg
+rm -f $ARCHIVE

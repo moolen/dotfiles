@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+SOURCE_DIR=$DIR/../../
+DIST_DIR=$DIR/../
+BUILD_DIR=$(mktemp -d)
+BUILD_FILE=arch-installer
+
+if [ -f $DIST_DIR/$BUILD_FILE ]; then
+  rm $DIST_DIR/$BUILD_FILE
+fi
+
+cd $BUILD_DIR
+cp -r $SOURCE_DIR .
+rm -rf .git
+
+#check if passwd files are encrypted
+for f in $(find backup/hosts -name passwd); do
+  TYPE=$(file $f | grep -c openssl || true)
+    if [ $TYPE == "0" ]; then
+      echo "file $f not encrypted, aborting"
+      exit 1
+    fi
+done
+
+# path is relative to $SOURCE_DIR root
+makeself $BUILD_DIR $BUILD_FILE lbl ./backup/installer.sh
+
+cp $BUILD_FILE $DIST_DIR
+rm -rf $BUILD_DIR
+

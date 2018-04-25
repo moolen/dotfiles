@@ -1,0 +1,6 @@
+backup/hosts/*
+!backup/hosts/example/passwd
+backup/arch-installer
+tags
+.DS_Store
+*.swp

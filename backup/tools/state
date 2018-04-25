@@ -1,0 +1,136 @@
+#!/bin/bash
+set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FILENAME="hosts.state"
+FILENAME_ENC=$FILENAME.enc
+
+function main {
+  start
+  case $1 in
+    "pull")
+      pull
+      ;;
+    "push")
+      push
+      ;;
+    "encrypt")
+      encrypt
+      ;;
+    "decrypt")
+      decrypt
+      ;;
+    *)
+      usage
+      ;;
+  esac
+  end
+}
+
+function usage {
+  echo "$(basename $0) [command]"
+  echo "manage host configuration"
+  echo "commands:"
+  echo -e "\tpull\tfetch the state from gdrive"
+  echo -e "\tpush\tsend the state to gdrive"
+  echo -e "\tencrypt\tencrypt host's passwd files"
+  echo -e "\tdecrypt\tdecrypt host's passwd files"
+}
+
+function start {
+  [ -f $FILENAME_ENC ] && rm $FILENAME_ENC
+  [ -f $FILENAME ] && rm $FILENAME
+  [ -d $DIR/_dist ] && rm -rf $DIR/_dist
+  mkdir $DIR/_dist
+  cd $DIR/_dist
+}
+
+function end {
+  [ -f $FILENAME_ENC ] && rm $FILENAME_ENC
+  [ -f $FILENAME ] && rm $FILENAME
+  [ -d $DIR/_dist ] && rm -rf $DIR/_dist
+}
+
+function pull {
+  gdrive download $(get_id)
+  dec_file $FILENAME_ENC $FILENAME
+  tar xvzf $FILENAME
+  [ -d $DIR/../hosts ] && rm -rf $DIR/../hosts
+  mv hosts $DIR/../
+}
+
+function push {
+  tar cvzf $FILENAME $DIR/../hosts
+  enc_file $FILENAME $FILENAME_ENC
+
+  if [ $(which backup_state_hook) ]; then
+    backup_state_hook $PWD/$FILENAME_ENC
+  fi
+
+  gdrive update $(get_id) $FILENAME_ENC
+  rm $FILENAME
+  rm $FILENAME_ENC
+}
+
+function get_id {
+  gdrive list -q "name = '$FILENAME_ENC' and '$BACKUP_GDRIVE_DIR_ID' in parents" | tail -n +2 | head -1 | cut -d" " -f 1
+}
+
+function encrypt {
+  echo -n password: 
+  read -s PASS
+  echo
+
+  for f in $(find $DIR/../hosts -name passwd); do
+    TYPE=$(file $f | grep -c openssl || true)
+    if [ $TYPE == "1" ]; then
+      echo "file $f encrypted, skipping"
+      continue
+    fi
+    echo encrypting $f
+    enc_file $f $f.enc $PASS
+    mv $f.enc $f
+  done
+}
+
+function decrypt {
+  echo -n password: 
+  read -s PASS
+  echo
+
+  for f in $(find $DIR/../hosts -name passwd); do
+    TYPE=$(file $f | grep -c openssl || true)
+    if [ $TYPE == "0" ]; then
+      echo "file $f not encrypted, skipping"
+      continue
+    fi
+    echo decrypting $f
+    dec_file $f $f.dec $PASS
+    mv $f.dec $f
+  done
+}
+
+function enc_file {
+  if [ $# -eq 3 ]; then
+    openssl aes-256-cbc -salt -in $1 -out $2 -pass pass:$3
+    return
+  fi
+  openssl aes-256-cbc -salt -in $1 -out $2
+}
+
+function dec_file {
+  if [ $# -eq 3 ]; then
+    openssl aes-256-cbc -d -in $1 -out $2 -pass pass:$3 
+    return
+  fi
+  openssl aes-256-cbc -d -in $1 -out $2
+}
+
+if [ "$BACKUP_GPG_RECIPIENT" == "" ] || [ "$BACKUP_GDRIVE_DIR_ID" == "" ]; then
+  echo missing required ENV VARS: \$BACKUP_GPG_RECIPIENT \$BACKUP_GDRIVE_DIR_ID
+  echo aborting
+  exit 1
+fi
+
+main "$@"
+
