@@ -11,6 +11,7 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local common = require("awful.widget.common")
 local dpi = require("beautiful").xresources.apply_dpi
+local internet = require("internet")
 local config = require("config")
 local util = require("util")
 local lain = require("lain")
@@ -83,6 +84,7 @@ awful.screen.connect_for_each_screen(function(s)
             widget:set_markup("◶ "..mem_now.used.."M")
         end
     })
+    local net_internet = internet({indent = 0, timeout = 5, showconnected = true})
     local mymem = wibox.container.margin(mymemory.widget, 10, 15, 0, 0)
 
 
@@ -103,6 +105,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            net_internet,
             mybat,
             mymem,
             volumewidget,
