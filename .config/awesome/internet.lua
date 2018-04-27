@@ -11,13 +11,20 @@ local function worker(args)
   local widget = wibox.widget.background()
   local timeout = args.timeout or 5
 
+
   local function net_update()
     connected = false
-    awful.spawn.easy_async("bash -c \"ping -c 1 8.8.8.8 | grep 'min/avg' | cut -d '/' -f 5 | xargs printf '%.0fms' 2>&1\"",
+    awful.spawn.easy_async("bash -o pipefail -c \"ping -c 1 8.8.8.8 | grep 'min/avg' | cut -d '/' -f 5 | xargs printf '%.0fms' 2>&1\"",
       function(out, err, reason, exit_code)
+
+        local widget_text = out
+        if exit_code == 1 then
+          widget_text = "✖"
+        end
+
         local internet_widget = wibox.widget {
           {
-            text = out,
+            text = widget_text,
             widget = wibox.widget.textbox,
             align = "center",
             resize = false,
