@@ -76,12 +76,6 @@ keybindings.clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ config.modkey}, "F4",      function (c) c:kill() end,
               {description = "close", group = "client"}),
-    awful.key({ config.modkey,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "maximize", group = "client"}),
     awful.key({ config.modkey, "Shift" }, "Left", function(c)
         local curtag = c:tags()[1].index
         local maxtags = #tags.names
