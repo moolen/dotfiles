@@ -12,8 +12,9 @@ local config = {
     revelation_charorder = "1234567890qwerasdf",
     layouts = {
         awful.layout.suit.fair,
+        awful.layout.suit.spiral,
+        awful.layout.suit.corner.nw,
         awful.layout.suit.tile,
-        awful.layout.suit.floating,
     }
 }
 
