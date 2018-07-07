@@ -12,6 +12,8 @@ bindkey "^k" kill-line
 # ctrl-q: kill current word
 bindkey "^q" delete-word
 
+bindkey -s "^G" " | grep "
+
 # lock X
 alias lock="xtrlock"
 
