@@ -19,6 +19,23 @@ alias lock="xtrlock"
 alias k="kubectl"
 alias ks="kubectl -n kube-system"
 
+# git
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -v'
+alias gcm='git checkout master'
+alias gcd='git checkout develop'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gf='git fetch'
+alias gfa='git fetch --all --prune'
+alias gfo='git fetch origin'
+alias gm='git merge'
+alias gp='git push'
+
+
 # misc
 alias diff='diff --color=auto'
 alias grep='grep --color=auto'
