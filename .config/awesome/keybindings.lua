@@ -102,7 +102,13 @@ keybindings.clientkeys = gears.table.join(
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
-        end)
+        end),
+    awful.key({ config.modkey, }, "m",
+        function (c)
+            c.maximized = not c.maximized
+            c:raise()
+        end ,
+        {description = "maximize", group = "client"})
 )
 
 keybindings.clientbuttons = gears.table.join(
