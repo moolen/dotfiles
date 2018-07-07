@@ -22,25 +22,26 @@ alias k="kubectl"
 alias ks="kubectl -n kube-system"
 
 # git
-alias g='git'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit -v'
-alias gcm='git checkout master'
-alias gcd='git checkout develop'
-alias gco='git checkout'
-alias gcp='git cherry-pick'
-alias gd='git diff'
-alias gf='git fetch'
-alias gfa='git fetch --all --prune'
-alias gfo='git fetch origin'
-alias gm='git merge'
-alias gp='git push'
+alias g="git"
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit -v"
+alias gcm="git checkout master"
+alias gcd="git checkout develop"
+alias gco="git checkout"
+alias gcp="git cherry-pick"
+alias gd="git diff"
+alias gf="git fetch"
+alias gfa="git fetch --all --prune"
+alias gfo="git fetch origin"
+alias gm="git merge"
+alias gp="git push"
+alias gs="git status"
 
 
 # misc
-alias diff='diff --color=auto'
-alias grep='grep --color=auto'
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
 alias c="clear"
 alias l="ls -la"
 
@@ -52,8 +53,8 @@ tm () {
         return
     fi
     tmux -2 new-session -d -s $SESSION
-    tmux rename-window 'home'
-    tmux new-window -t $SESSION:1 -n 'scratch'
+    tmux rename-window "home"
+    tmux new-window -t $SESSION:1 -n "scratch"
     tmux select-window -t $SESSION:0
     tmux -2 attach-session -t $SESSION
 }
