@@ -5,15 +5,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOTFILES=$DIR/..
 echo "starting installer.."
 
-if [ ! -f $DIR/hosts/$HOST/passwd ]; then
-  echo "\$HOST missing";
-  exit 1
+if [ -f $DIR/hosts/$HOST/passwd ]; then
+  echo decrypting host state
+  TMP=$(mktemp)
+  openssl aes-256-cbc -d -in $DIR/hosts/$HOST/passwd -out $TMP
+  source $TMP
 fi
-
-echo decrypting host state
-TMP=$(mktemp)
-openssl aes-256-cbc -d -in $DIR/hosts/$HOST/passwd -out $TMP
-source $TMP
 
 PACKAGES=${PACKAGES:-$(cat $DIR/pkglist)}
 
