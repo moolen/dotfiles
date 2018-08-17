@@ -39,7 +39,6 @@ rm airootfs.sfs
 mv squashfs-root/boot/vmlinuz-linux $ISO_MOUNT/arch/boot/x86_64/vmlinuz
 mv squashfs-root/boot/initramfs-linux.img $ISO_MOUNT/arch/boot/x86_64/archiso.img
 rm squashfs-root/boot/initramfs-linux-fallback.img
-mv squashfs-root/pkglist.txt $ISO_MOUNT/arch/pkglist.x86_64.txt
 mksquashfs squashfs-root airootfs.sfs
 rm -rf squashfs-root
 md5sum airootfs.sfs > airootfs.md5

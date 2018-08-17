@@ -4,7 +4,7 @@ echo "installing arch.."
 
 pacman-key --init
 pacman-key --populate archlinux
-pacman -Syu --noconfirm git
+pacman -Sy --noconfirm git
 
 cat << EOF > /root/.bashrc
 if [ ! -f /root/.init.ok ]; then
