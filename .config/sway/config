@@ -1,0 +1,105 @@
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+# workspaces
+set $ws_1 λ
+set $ws_2 ⋚
+set $ws_3 ∞
+set $ws_4 Ẅ
+set $ws_5 ω
+
+set $term termite
+set $menu rofi -show run
+
+gaps inner 10
+gaps outer 10
+default_border pixel 3
+
+output * bg ~/dotfiles/wallpaper/mnt.jpg fill
+
+client.focused #6F8FB4 #000000 #ffffff #ffffff #6F8FB4
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+r exec $menu
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+q exit
+# audio
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 10%+ unmute
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 10%- unmute
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-
+bindsym alt+up exec --no-startup-id amixer -q set Master 10%+ unmute
+bindsym alt+down exec --no-startup-id amixer -q set Master 10%- unmute
+
+# navigate
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# move window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# switch to workspace
+bindsym $mod+1 workspace $ws_1
+bindsym $mod+2 workspace $ws_2
+bindsym $mod+3 workspace $ws_3
+bindsym $mod+4 workspace $ws_4
+bindsym $mod+5 workspace $ws_5
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws_1
+bindsym $mod+Shift+2 move container to workspace $ws_2
+bindsym $mod+Shift+3 move container to workspace $ws_3
+bindsym $mod+Shift+4 move container to workspace $ws_4
+bindsym $mod+Shift+5 move container to workspace $ws_5
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+mode "resize" {
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+q mode "resize"
+
+bar {
+    position bottom
+    id bottom
+    status_command i3blocks
+    font hack
+    strip_workspace_numbers yes
+
+    colors {
+        background #00000044
+        statusline #999999
+        separator #666666
+        focused_workspace #6F8FB4 #6F8FB4 #ffffff
+        inactive_workspace #00000000 #323232 #5c5c5c
+        active_workspace #ffff00 #00ff00 #7c7c7c
+    }
+}
