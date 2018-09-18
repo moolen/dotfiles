@@ -19,7 +19,7 @@ local function worker(args)
 
         local widget_text = out
         if exit_code == 1 then
-          widget_text = "✖"
+          widget_text = "⨯"
         end
 
         local internet_widget = wibox.widget {
