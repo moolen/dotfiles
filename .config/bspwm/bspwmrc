@@ -1,0 +1,17 @@
+#! /bin/sh
+sxhkd &
+polybar top &
+compton -O 0.5 -I 0.5 -b
+
+feh -z --bg-scale ~/dotfiles/wallpaper/wall.png &
+
+bspc monitor eDP-1 -d λ ⋚ ∞ Ẅ ω
+bspc monitor HDMI-1 -d λ ⋚ ∞ Ẅ ω
+
+bspc config border_width         2
+bspc config window_gap          20
+
+bspc config split_ratio          0.55
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+

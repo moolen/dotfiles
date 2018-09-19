@@ -1,3 +1,5 @@
 xbindkeys
 xrdb -merge ~/.Xresources
-exec awesome -c ~/.config/awesome/rc.lua
+bspwm
+#exec awesome -c ~/.config/awesome/rc.lua
+#i3

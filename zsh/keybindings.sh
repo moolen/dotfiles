@@ -15,7 +15,7 @@ bindkey "^q" delete-word
 bindkey -s "^G" " | grep "
 
 # lock X
-alias lock="xtrlock"
+alias lock="glitchlock"
 
 # kubernetes
 alias k="kubectl"
