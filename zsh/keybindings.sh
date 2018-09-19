@@ -21,6 +21,10 @@ alias lock="xtrlock"
 alias k="kubectl"
 alias ks="kubectl -n kube-system"
 
+# ansible
+alias av="ansible-vault view"
+alias ae="ansible-vault edit"
+
 # git
 alias g="git"
 alias ga="git add"
