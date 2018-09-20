@@ -12,7 +12,7 @@ function make_link {
     ln -s $DIR/$1 ~/$1
 }
 
-LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc .config/rofi .config/nvim .config/awesome .config/termite .config/sway .config/i3blocks"
+LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc .config/rofi .config/nvim .config/awesome .config/termite .config/sway .config/i3blocks .config/bspwm .config/sxhkd .config/polybar"
 
 for item in $LINKS; do
     make_link $item
