@@ -13,19 +13,23 @@ super + shift + r
 super + shift + q
 	bspc quit
 
+# close window
 alt + q
 	bspc node -{c,k}
 
+# set the window state
 super + {t,f}
 	bspc node -t {tiled,fullscreen}
+
+alt + shift + {l,h}
+	$HOME/dotfiles/scripts/bspwm_resize.sh {east,west}
+
+alt + shift + {j,k}
+    $HOME/dotfiles/scripts/bspwm_resize.sh {south,north}
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -34,23 +38,17 @@ super + {_,shift + }{1-9,0}
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
+# preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
+# cancel the preselection for the focused node
 super + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 super + alt + 1
     setxkbmap us
