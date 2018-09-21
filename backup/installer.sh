@@ -14,13 +14,19 @@ fi
 
 PACKAGES=${PACKAGES:-$(cat $DIR/pkglist)}
 
-echo "press enter to proceed with installation"
-read
-
 function main {
   ping -c 1 8.8.8.8 || error "could not ping 8.8.8.8; no working internet connection?!"
   [ -e ${DEVICE} ] || error "device $DEVICE does not exist"
 
+  run_intro
+  echo DEVICE :: $DEVICE
+  echo SWAP_SIZE :: $SWAP_SIZE
+  echo TIMEZONE :: $TIMEZONE
+  echo USER :: $MYUSERNAME
+  echo HOSTNAME :: $HOSTNAME
+  echo PACKAGES :: $PACKAGES
+  echo -e "\npress enter to proceed with installation"
+  read
   case $1 in
     "system")
         bootstrap_system
@@ -34,7 +40,7 @@ function main {
     *)
         bootstrap_system
         bootstrap_os
-        install_pkgs
+        install_dotfiles
         ;;
   esac
 }
@@ -42,6 +48,27 @@ function main {
 function error {
     echo $1
     exit 1
+}
+
+function run_intro {
+    echo available devices:
+    lsblk
+    echo -e "\nplease specify the install device (full path!):"
+    read DEVICE
+    echo -e "\nplease specify the crypt pass:"
+    read DEVICE_CRYPT_PASS
+    echo -e "\nplease specify the swap file size:"
+    read SWAP_SIZE
+    echo -e "\nplease specify the timezone:"
+    read TIMEZONE
+    echo -e "\nplease specify the HOSTNAME:"
+    read HOSTNAME
+    echo -e "\nplease specify the root password:"
+    read ROOT_PASS
+    echo -e "\nplease specify the username:"
+    read MYUSERNAME
+    echo -e "\nplease specify $MYUSERNAME's password:"
+    read MYUSERPASS
 }
 
 function chroot {
