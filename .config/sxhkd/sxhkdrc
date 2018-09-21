@@ -17,9 +17,10 @@ super + shift + q
 alt + q
 	bspc node -{c,k}
 
-# set the window state
-super + {t,f}
-	bspc node -t {tiled,fullscreen}
+super + f
+    state=fullscreen; \
+    bspc query -N "focused.$\{state\}" && state=tiled; \
+    bspc node -t "$state"
 
 alt + shift + {l,h}
 	$HOME/dotfiles/scripts/bspwm_resize.sh {east,west}
