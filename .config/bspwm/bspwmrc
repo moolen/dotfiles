@@ -1,15 +1,20 @@
 #! /bin/sh
 sxhkd &
-polybar top &
 compton -O 0.5 -I 0.5 -b
+
+for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+  MONITOR=$m polybar --reload bottom &
+done
 
 # mouse focus
 bspc config focus_follows_pointer true
+bspc config focused_border_color "#6f8fb4"
+
 
 feh -z --bg-scale ~/dotfiles/wallpaper/wall.png &
 
-bspc monitor eDP-1 -d λ ⋚ ∞ Ẅ ω
-bspc monitor HDMI-1 -d λ ⋚ ∞ Ẅ ω
+bspc monitor eDP-1 -d λ ⋚ ∞
+bspc monitor HDMI-1 -d Ẅ ω µ
 
 bspc config border_width         2
 bspc config window_gap          20
