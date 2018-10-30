@@ -27,7 +27,9 @@ function main {
   echo HOSTNAME :: $HOSTNAME
   echo PACKAGES :: $PACKAGES
   echo -e "\npress enter to proceed with installation"
-  read
+  if [ -z "${NONINTERACTIVE}" ]; then
+    read
+  fi
   case $1 in
     "system")
         bootstrap_system
@@ -125,6 +127,8 @@ function bootstrap_os {
     hwclock --systohc --utc
     echo ${HOST} > /etc/hostname
 
+    pacman-key --refresh-keys
+
     echo LANG=en_US.UTF-8 >> /etc/locale.conf
     echo LANGUAGE=en_US >> /etc/locale.conf
     echo LC_ALL=C >> /etc/locale.conf
@@ -183,9 +187,8 @@ function install_dotfiles {
       fi
       # thunderbird-enigmail
       gpg --recv-keys DB1187B9DD5F693B
-      pacman -Sy archlinux-keyring --noconfirm
       yaourt -Sy ${PACKAGES} --noconfirm
-      mkdir .ssh
+      mkdir ~/.ssh
       cd ~/dotfiles;
       ./deploy.sh
       mkdir ~/bin
