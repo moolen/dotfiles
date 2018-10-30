@@ -2,9 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # build installer
-if [[ ! -f $DIR/../backup/arch-installer ]]; then
-    $DIR/../backup/tools/build
-fi
+$DIR/../backup/tools/build
 
 ISO=$(find /var/lib/libvirt/images -name 'archlinux-*.iso')
 if [[ ! -f "$ISO" ]]; then

@@ -184,6 +184,7 @@ function install_dotfiles {
       # thunderbird-enigmail
       gpg --recv-keys DB1187B9DD5F693B
       yaourt -Sy ${PACKAGES} --noconfirm
+      mkdir .ssh
       cd ~/dotfiles;
       ./deploy.sh
       mkdir ~/bin
