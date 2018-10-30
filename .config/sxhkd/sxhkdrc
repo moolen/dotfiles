@@ -39,6 +39,10 @@ super + {_,shift + }{1-9,0}
 alt + shift + {t,f}
 	bspc node -t {tiled,floating}
 
+# send focused node to non-focused monitor
+super + o
+    bspc node -d $(bspc query -M -m '.!focused' --names)":focused" --follow
+
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 

@@ -17,7 +17,7 @@ PACKAGES=${PACKAGES:-$(cat $DIR/pkglist)}
 function main {
   ping -c 1 8.8.8.8 || error "could not ping 8.8.8.8; no working internet connection?!"
   if [ -z "${DEVICE}" ]; then
-    run_intro
+    get_user_input
   fi
 
   echo DEVICE :: $DEVICE
@@ -51,7 +51,7 @@ function error {
     exit 1
 }
 
-function run_intro {
+function get_user_input {
     echo available devices:
     lsblk
     echo -e "\nplease specify the install device (full path!):"
@@ -183,6 +183,7 @@ function install_dotfiles {
       fi
       # thunderbird-enigmail
       gpg --recv-keys DB1187B9DD5F693B
+      pacman -Sy archlinux-keyring --noconfirm
       yaourt -Sy ${PACKAGES} --noconfirm
       mkdir .ssh
       cd ~/dotfiles;
