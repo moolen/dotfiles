@@ -12,13 +12,12 @@ function make_link {
     ln -s $DIR/$1 ~/$1
 }
 
-LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc"
+LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc .config/Code/User/keybindings.json .config/Code/User/settings.json"
 
 for item in $LINKS; do
     make_link $item
 done
 
-for confdir in $(find .config -maxdepth 1 -mindepth 1 -type d); do
+for confdir in $(find .config -maxdepth 1 -mindepth 1 -not -name Code -type d); do
     make_link $confdir
 done
-

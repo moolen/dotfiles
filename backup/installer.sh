@@ -16,9 +16,10 @@ PACKAGES=${PACKAGES:-$(cat $DIR/pkglist)}
 
 function main {
   ping -c 1 8.8.8.8 || error "could not ping 8.8.8.8; no working internet connection?!"
-  [ -e ${DEVICE} ] || error "device $DEVICE does not exist"
+  if [ -z "${DEVICE}" ]; then
+    run_intro
+  fi
 
-  run_intro
   echo DEVICE :: $DEVICE
   echo SWAP_SIZE :: $SWAP_SIZE
   echo TIMEZONE :: $TIMEZONE
@@ -198,5 +199,3 @@ EOF
 }
 
 main "$@"
-
-

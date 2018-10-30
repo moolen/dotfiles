@@ -23,7 +23,7 @@ background = #0000
 foreground = ${colors.white}
 
 modules-left   = bspwm
-modules-center = 
+modules-center =
 modules-right  = wireless-network cpu memory volume battery date
 bottom = true
 
@@ -70,7 +70,7 @@ label = %mb_used%
 type = internal/network
 interface = wlp3s0
 
-label-connected = 
+label-connected =
 label-disconnected = "[%ifname% ⨯]"
 label-disconnected-padding = 1
 
@@ -114,7 +114,7 @@ interval = 1.0
 date = "%Y-%M-%d"
 
 time-alt = %a %d %b
-time     = %a %H:%M 
+time     = %a %H:%M
 
 label             = %time%
 format            = "<label>"
@@ -139,4 +139,3 @@ label-muted-padding = ${dims.padding}
 [global/wm]
 margin-top    = 1
 margin-bottom = 1
-

@@ -1,0 +1,12 @@
+{
+    "workbench.startupEditor": "none",
+    "window.zoomLevel": 1,
+    "editor.fontFamily": "hack",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    "cmake.configureOnOpen": true,
+    "breadcrumbs.enabled": true,
+    "editor.renderWhitespace": "all",
+    "workbench.colorTheme": "Horizon"
+}
