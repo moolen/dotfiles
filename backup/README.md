@@ -21,7 +21,7 @@ export BACKUP_DIRS="~/foo ~/bar ~/baz"
 BACKUP_GPG_RECIPIENT=MY-GPG-KEY-ID
 
 # this is where the system state is stored
-# use gdrive to query: 
+# use gdrive to query:
 # > gdrive list -q "name contains 'my-backup-folder'"
 BACKUP_GDRIVE_DIR_ID=id-of-gdrive-directory
 EOF
@@ -120,32 +120,30 @@ $ ./tools/build
 $ scp ~/dotfiles/backup/arch-installer $MYNEWMACHINE
 ```
 
-On `$MYNEWMACHINE` just execute the installer and wait
+On `$MYNEWMACHINE` just execute the installer and follow the instructions
 ``` sh
-$ HOST=myhost DEVICE=/dev/sda ./arch-installer
+$ ./arch-installer
 ```
 
-Alternatively you can do the installation bit-by-bit:
+Alternatively you can do the installation in a non-interactive mode:
 
 ```
-$ export HOST=myhost
+# prepare env vars
+$ export NONINTERACTIVE=1
 $ export DEVICE=/dev/sda
+$ export DEVICE_CRYPT_PASS=1234
+$ export SWAP_SIZE=2G
+$ export TIMEZONE=Europe/Berlin
+$ export HOSTNAME=testbox
+$ export ROOT_PASS=1234
+$ export MYUSERNAME=dawg
+$ export MYUSERPASS=1234
 
-# partition/filesystem/pacstrap/fstab
-$ ./arch-installer system
+# launch installer
+$ ./arch-installer
 
-# timezone/locale/useradd/root-pass/bootloader
-$ ./arch-installer os 
-
-# (optional) yaourt/pkglist/dotfiles
-$ ./arch-installer dotfiles 
 ```
 
 Testing the installer
 
-- spawn a virtualbox with bridged networking
-- on the host, run `socat tcp-l:4000,reuseaddr,fork exec:"cat ./arch-installer"` from this directory
-- test it on the host using `nc localhost 4000`
-- go into the vm-box and `nc <ip-of-host> 4000 > installer; chmod +x ./installer`
-- execute the script as described above
-
+See [../test](../test) directory for instructions on testing.

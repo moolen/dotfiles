@@ -8,7 +8,7 @@
 ## INSTALL
 
 ```
-$ git clone --recurse-submodules git@gitlab.com:Moritz.Johner/dotfiles.git ~/dotfiles
+$ git clone --recurse-submodules git@github.com:moolen/dotfiles.git ~/dotfiles
 
 $ cd dotfiles
 

@@ -25,10 +25,6 @@ unsquashfs airootfs.sfs
 
 # copy installer
 cp $DIR/../backup/arch-installer $TMP_DIR/arch/x86_64/squashfs-root/root
-# set root password
-arch-chroot $TMP_DIR/arch/x86_64/squashfs-root /bin/bash -c "echo 'root:1234' | chpasswd"
-# enable ssh
-arch-chroot $TMP_DIR/arch/x86_64/squashfs-root /bin/bash -c "systemctl enable sshd"
 
 # use custom mirror
 if [[ "${PACMAN_MIRROR}" != "" ]]; then
