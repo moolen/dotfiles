@@ -3,12 +3,14 @@ MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
 SYMBOLS="λ ⋚ ∞ Ẅ ω µ"
 
 # kill existing progs
-for prog in sxhkd compton polybar feh; do
+for prog in sxhkd compton polybar feh dunst; do
   pkill $prog
 done
 
 # start progs
 sxhkd &
+dunst &
+~/dotfiles/scripts/battery_monitor.sh &
 compton -O 0.5 -I 0.5 -b
 
 # monitor set-up
