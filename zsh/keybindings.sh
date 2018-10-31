@@ -15,7 +15,7 @@ bindkey "^q" delete-word
 bindkey -s "^G" " | grep "
 
 # lock X
-alias lock="glitchlock"
+alias lock="gllock -overlay ~/dotfiles/trollface.png"
 
 # kubernetes
 alias k="kubectl"
