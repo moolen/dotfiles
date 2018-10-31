@@ -8,11 +8,21 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # build installer
-$DIR/../backup/tools/build
+$DIR/../backup/tools/build-installer
+
+echo "starting http server for install script at :3000"
+cd $DIR/../backup/
+python3 -m http.server --directory $DIR/../backup/ 3000 &
 
 # create iso
-$DIR/remaster.sh
-sudo mv arch-custom.iso $DEST_ISO
+#$DIR/remaster.sh
+#sudo mv arch-custom.iso $DEST_ISO
+
+if [ ! -f "$ISO" ]; then
+  echo "ISO not found: ${ISO}"
+  exit 1
+fi
+sudo cp $ISO $DEST_ISO
 
 NAME="arch-dotfiles-test"
 
