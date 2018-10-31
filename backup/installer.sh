@@ -14,8 +14,26 @@ fi
 
 PACKAGES=${PACKAGES:-$(cat $DIR/pkglist)}
 
+function kernel_cmdline {
+    local param
+    for param in $(< /proc/cmdline); do
+        case "${param}" in
+            "$1"=*) echo "${param#*=}" ; return 0 ;;
+        esac
+    done
+}
+
 function main {
   ping -c 1 8.8.8.8 || error "could not ping 8.8.8.8; no working internet connection?!"
+
+  # specify pacman mirror via kernel cmdline
+  pacman_mirror="$(kernel_cmdline pacman_mirror)"
+  if [[ "${pacman_mirror}" != "" ]]; then
+    echo "setting pacman mirror from kernel cmdline: ${pacman_mirror}"
+    echo "Server = ${pacman_mirror}/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+    pacman -Sy
+  fi
+
   if [ -z "${DEVICE}" ]; then
     get_user_input
   fi
@@ -56,14 +74,17 @@ function error {
 function get_user_input {
     echo available devices:
     lsblk
-    echo -e "\nplease specify the install device (full path!):"
+    echo -e "\nplease specify the install device (/dev/sda):"
     read DEVICE
+    DEVICE=${DEVICE:-"/dev/sda"}
     echo -e "\nplease specify the crypt pass:"
     read DEVICE_CRYPT_PASS
-    echo -e "\nplease specify the swap file size:"
+    echo -e "\nplease specify the swap file size (2G):"
     read SWAP_SIZE
-    echo -e "\nplease specify the timezone:"
+    SWAP_SIZE=${SWAP_SIZE:-"2G"}
+    echo -e "\nplease specify the timezone (Europe/Berlin):"
     read TIMEZONE
+    TIMEZONE=${TIMEZONE:-"Europe/Berlin"}
     echo -e "\nplease specify the HOSTNAME:"
     read HOSTNAME
     echo -e "\nplease specify the root password:"
