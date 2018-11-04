@@ -1,17 +1,18 @@
 #!/bin/bash
 MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
-SYMBOLS="λ ⋚ ∞ Ẅ ω µ"
+SYMBOLS="λ ⋚ ∞ ω µ"
 
 # kill existing progs
-for prog in sxhkd compton polybar feh dunst; do
+for prog in sxhkd compton polybar feh dunst nm-applet; do
   pkill $prog
 done
 
 # start progs
 sxhkd &
+nm-applet &
 dunst &
 ~/dotfiles/scripts/battery_monitor.sh &
-compton -O 0.5 -I 0.5 -b
+compton --config ~/.config/compton/compton.conf -b
 
 # monitor set-up
 for mon in $MONITORS; do

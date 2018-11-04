@@ -7,7 +7,7 @@ do
     charge=`acpi | head -1 | grep -P -o '[0-9]+(?=%)'`
 
     if [ $state = "Discharging," ] && [ $charge -le 20 ]; then
-        notify-send "Battery low, ${charge}% remaining"
+        notify-send -u critical "Battery low, ${charge}% remaining"
     fi
     sleep 120
 done

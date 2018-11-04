@@ -29,6 +29,8 @@ bottom = true
 
 wm-restack    = bspwm
 
+tray-position = right
+
 ; bspwm
 [module/bspwm]
 type = internal/bspwm

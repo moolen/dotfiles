@@ -17,6 +17,10 @@ super + shift + q
 alt + q
 	bspc node -{c,k}
 
+# roll background
+alt + shift + w
+    feh -z --bg-scale ~/dotfiles/wallpaper
+
 super + f
     state=fullscreen; \
     bspc query -N "focused.$\{state\}" && state=tiled; \
