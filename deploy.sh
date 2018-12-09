@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc .config/Code/User/keybindings.json .config/Code/User/settings.json"
+CONF_DIRS=$(find .config -maxdepth 1 -mindepth 1 -not -name Code -type d)
 
 echo "deploying dotfiles.."
 
@@ -12,12 +14,12 @@ function make_link {
     ln -s $DIR/$1 ~/$1
 }
 
-LINKS=".xbindkeysrc .xinitrc .Xresources .tmux.conf .zshrc .config/Code/User/keybindings.json .config/Code/User/settings.json"
+[ -d ~/.ssh ] || mkdir ~/.ssh
+[ -d ~/bin ] || mkdir ~/bin
 
-for item in $LINKS; do
+yay -Sy $(cat pkglist) --noconfirm
+ln -s /usr/bin/nvim ~/bin/vim
+
+for item in $LINKS $CONF_DIRS; do
     make_link $item
-done
-
-for confdir in $(find .config -maxdepth 1 -mindepth 1 -not -name Code -type d); do
-    make_link $confdir
 done

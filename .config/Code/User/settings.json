@@ -5,8 +5,18 @@
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true,
-    "cmake.configureOnOpen": true,
     "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "all",
-    "workbench.colorTheme": "Horizon"
+    "workbench.colorTheme": "Horizon",
+    "terminal.integrated.rendererType": "dom",
+    "explorer.confirmDragAndDrop": false,
+    "yaml.hover": false,
+    "yaml.validate": false,
+    "yaml.format.bracketSpacing": false,
+    "yaml.completion": false,
+    "explorer.confirmDelete": false,
+    "window.titleBarStyle": "custom",
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": ["-d=C0301,R"],
+    "python.linting.pylintPath": "/usr/bin/pylint"
 }
