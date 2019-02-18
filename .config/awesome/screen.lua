@@ -110,6 +110,7 @@ awful.screen.connect_for_each_screen(function(s)
             mymem,
             volumewidget,
             textclock,
+            wibox.widget.systray(),
         },
     }
 end)
