@@ -29,17 +29,18 @@ if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
 
-# ssh agent
-if [ ! -e ~/.ssh/agentsock ]; then
-    eval $(ssh-agent -a ~/.ssh/agentsock)
-else
-    export SSH_AUTH_SOCK=~/.ssh/agentsock
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent)" >/dev/null 2>&1
 fi
 
 # plugins
 source ~/dotfiles/zsh/plugins/fixls.zsh
 autoload -Uz compinit && compinit -i
 
+source ~/dotfiles/zsh/plugins/kubectl.zsh
 source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/history.zsh
 source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/key-bindings.zsh
 source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/completion.zsh

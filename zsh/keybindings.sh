@@ -20,6 +20,8 @@ alias lock="gllock -overlay ~/dotfiles/trollface.png"
 # kubernetes
 alias k="kubectl"
 alias ks="kubectl -n kube-system"
+alias kk="kubectl config get-contexts"
+alias kdump="kubectl get all --all-namespaces | less"
 
 # ansible
 alias av="ansible-vault view"

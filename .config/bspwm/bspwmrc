@@ -3,7 +3,7 @@ MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
 SYMBOLS="λ ⋚ ∞ ω µ"
 
 # kill existing progs
-for prog in sxhkd compton polybar feh dunst nm-applet; do
+for prog in sxhkd compton polybar feh dunst nm-applet gebaard; do
   pkill $prog
 done
 
@@ -11,6 +11,7 @@ done
 sxhkd &
 nm-applet &
 dunst &
+gebaard -b
 ~/dotfiles/scripts/battery_monitor.sh &
 compton --config ~/.config/compton/compton.conf -b
 
