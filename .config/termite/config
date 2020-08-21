@@ -12,7 +12,7 @@ cursor_blink = on
 foreground      = #cfd6e4
 foreground_bold = #cfd6e4
 cursor          = #cfd6e4
-background      = #232731
+background      = rgba(23, 27, 31, 0.85)
 
 # black
 color0  = #2d3241
