@@ -56,7 +56,11 @@ super + ctrl + {1-9}
 
 # rotate root tree
 super + ctrl + Return
-    bspc node @/ -R 90
+    bspc node -R 90
+
+# focus parent
+super + ctrl + Up
+    bspc node -f @parent
 
 # cancel the preselection for the focused node
 super + ctrl + space
