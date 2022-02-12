@@ -1,6 +1,9 @@
 #!/bin/bash
-MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
+NUM_MONITORS=$(xrandr -q | grep ' connected' | wc -l)
 SYMBOLS="λ ⋚ ∞ ω µ"
+
+MON_INT="eDP-1"
+MON_EXT="HDMI-2"
 
 # kill existing progs
 for prog in sxhkd compton polybar feh dunst nm-applet gebaard; do
@@ -15,11 +18,16 @@ gebaard -b
 ~/dotfiles/scripts/battery_monitor.sh &
 compton --config ~/.config/compton/compton.conf -b
 
-# monitor set-up
-for mon in $MONITORS; do
-  MONITOR=$mon polybar --reload bottom &
-  bspc monitor $mon -d ${SYMBOLS}
-done
+# internal
+MONITOR=$MON_INT polybar --reload bottom &
+bspc monitor $MON_INT -d ${SYMBOLS}
+
+# HDMI
+if [ $NUM_MONITORS -eq "2" ]; then
+  MONITOR=$MON_EXT polybar --reload bottom &
+  bspc monitor $MON_EXT -d ${SYMBOLS}
+fi
+
 
 # mouse focus
 bspc config focus_follows_pointer true

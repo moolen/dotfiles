@@ -19,13 +19,14 @@ override-redirect = false
 font-0 = Hack:pixelsize=8;1
 font-1 = Material Icons:pixelsize=8;1
 font-2 = ubuntu:pixelsize=10;1
-background = #0000
+background = #ff000000
 foreground = ${colors.white}
 
 modules-left   = bspwm
 modules-center =
 modules-right  = wireless-network cpu memory volume battery date
 bottom = true
+
 
 wm-restack    = bspwm
 
@@ -39,7 +40,7 @@ index-sort = true
 wrapping-scroll = false
 
 label-focused            = %name%
-label-focused-background = #0000
+label-focused-background = #f000
 label-focused-foreground = ${colors.blue}
 label-focused-font       = 1
 label-focused-padding    = 1
@@ -50,13 +51,13 @@ label-urgent-foreground = #0000
 label-urgent-padding = 1
 
 label-empty            = %name%
-label-empty-background = #0000
+label-empty-background = #f000
 label-empty-foreground = ${colors.white}
 label-empty-font       = 1
 label-empty-padding    = 1
 
 label-occupied            = %name%
-label-occupied-background = #0000
+label-occupied-background = #f000
 label-occupied-foreground = ${colors.white}
 label-occupied-padding    = 1
 
@@ -70,7 +71,7 @@ label = %mb_used%
 
 [module/wireless-network]
 type = internal/network
-interface = wlp3s0
+interface = wlp61s0
 
 label-connected =
 label-disconnected = "[%ifname% ⨯]"

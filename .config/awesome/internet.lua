@@ -8,7 +8,7 @@ local module_path = (...):match ("(.+/)[^/]+$") or ""
 local internet = {}
 local function worker(args)
   local args = args or {}
-  local widget = wibox.widget.background()
+  local widget = wibox.container.background()
   local timeout = args.timeout or 5
 
 

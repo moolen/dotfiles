@@ -15,7 +15,7 @@ util.run_once = function(cmd)
 end
 
 util.wallpaper_changer = function(_)
-    util.run_once(config.change_wallpaper)
+    awful.spawn(config.change_wallpaper)
 end
 
 -- Wibar transparent/opaque function

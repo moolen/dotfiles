@@ -1,5 +1,5 @@
 super + Return
-	termite
+	kitty
 
 super + r
 	rofi -show run
@@ -22,9 +22,7 @@ alt + shift + w
     feh -z --bg-scale ~/dotfiles/wallpaper
 
 super + f
-    state=fullscreen; \
-    bspc query -N "focused.$\{state\}" && state=tiled; \
-    bspc node -t "$state"
+    bspc node -t \~fullscreen
 
 alt + shift + {l,h}
 	$HOME/dotfiles/scripts/bspwm_resize.sh {east,west}
@@ -42,6 +40,10 @@ super + {_,shift + }{1-9,0}
 
 alt + shift + {t,f}
 	bspc node -t {tiled,floating}
+
+# screenshot
+shift + alt + p
+    scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'
 
 # send focused node to non-focused monitor
 super + o

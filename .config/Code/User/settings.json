@@ -1,22 +1,118 @@
 {
     "workbench.startupEditor": "none",
-    "window.zoomLevel": 1,
     "editor.fontFamily": "hack",
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true,
     "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "all",
-    "workbench.colorTheme": "Horizon",
     "terminal.integrated.rendererType": "dom",
     "explorer.confirmDragAndDrop": false,
     "yaml.hover": false,
     "yaml.validate": false,
     "yaml.format.bracketSpacing": false,
     "yaml.completion": false,
+    "yaml.schemas": {
+        "Kubernetes": "*.yaml"
+    },
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
     "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": ["-d=C0301,R"],
-    "python.linting.pylintPath": "/usr/bin/pylint"
+    "python.linting.pylintArgs": [
+        "-d=C0301,R"
+    ],
+    "python.linting.pylintPath": "/usr/bin/pylint",
+    "vs-kubernetes": {
+        "vs-kubernetes.minikube-path": "/home/moritz/.vs-kubernetes/tools/minikube/linux-amd64/minikube",
+        "vs-kubernetes.minikube-path.linux": "/home/moritz/.vs-kubernetes/tools/minikube/linux-amd64/minikube",
+        "vscode-kubernetes.minikube-path.linux": "/home/moritz/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "python.jediEnabled": false,
+    "opa.path": "/home/moritz/opa",
+    //"go.formatTool": "goimports",
+    "go.alternateTools": {
+        "dlv": "/home/moritz/bin/dlv.sh"
+    },
+    //"go.languageServerExperimentalFeatures": {
+    //    "format": true,
+    //    "autoComplete": true
+    //},
+    "[go]": {
+        //"editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+    },
+    "editor.minimap.enabled": false,
+    "terraform.indexing": {
+        "enabled": false,
+        "liveIndexing": false,
+        "delay": 500,
+        "exclude": [
+            ".terraform/**/*",
+            "**/.terraform/**/*"
+        ]
+    },
+    "terraform.languageServer": {
+        "external": true,
+        "args": [
+            "serve"
+        ]
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "eslint.alwaysShowStatus": true,
+    "eslint.run": "onSave",
+    "go.useLanguageServer": true,
+    "todo-tree.tree.showScanModeButton": false,
+    "cmake.configureOnOpen": true,
+    "workbench.activityBar.visible": true,
+    "editor.renderControlCharacters": true,
+    "python.languageServer": "Microsoft",
+    "jupyter.askForKernelRestart": false,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "editor.wordWrapColumn": 100,
+    "html.format.wrapLineLength": 100,
+    "go.delveConfig": {
+
+        "dlvLoadConfig": {
+            "followPointers": true,
+            "maxVariableRecurse": 1,
+            "maxStringLen": 64,
+            "maxArrayValues": 64,
+            "maxStructFields": -1
+        },
+        "dlvFlags": ["--check-go-version=false"],
+        "apiVersion": 2,
+        "showGlobalVariables": false
+    },
+    "window.zoomLevel": 1,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "workbench.colorTheme": "Horizon",
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    }
 }

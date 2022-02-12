@@ -12,8 +12,8 @@ set $ws_3 ∞
 set $ws_4 Ẅ
 set $ws_5 ω
 
-set $term termite
-set $menu dmenu_run -fn hack -sb \#37587a -nf \#666666
+set $term kitty
+set $menu rofi -show run
 
 gaps inner 10
 gaps outer 10
@@ -24,9 +24,9 @@ output * bg ~/dotfiles/wallpaper/mnt.jpg fill
 client.focused #6F8FB4 #000000 #ffffff #ffffff #6F8FB4
 
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q kill
 bindsym $mod+r exec $menu
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 bindsym $mod+Shift+q exit
 # audio
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 10%+ unmute
@@ -36,23 +36,29 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-
 bindsym alt+up exec --no-startup-id amixer -q set Master 10%+ unmute
 bindsym alt+down exec --no-startup-id amixer -q set Master 10%- unmute
+bindsym alt+$mod+2 exec swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_switch_layout 0
+bindsym alt+$mod+1 exec swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_switch_layout 1
+
 
 # navigate
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
+
 # move window
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+
 # switch to workspace
 bindsym $mod+1 workspace $ws_1
 bindsym $mod+2 workspace $ws_2
 bindsym $mod+3 workspace $ws_3
 bindsym $mod+4 workspace $ws_4
 bindsym $mod+5 workspace $ws_5
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws_1
 bindsym $mod+Shift+2 move container to workspace $ws_2
@@ -68,11 +74,8 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
-
 bindsym $mod+Shift+space floating toggle
-
 bindsym $mod+space focus mode_toggle
-
 bindsym $mod+a focus parent
 
 mode "resize" {
@@ -90,8 +93,7 @@ bindsym $mod+q mode "resize"
 bar {
     position bottom
     id bottom
-    status_command i3blocks
-    font hack
+    swaybar_command waybar
     strip_workspace_numbers yes
 
     colors {
@@ -103,3 +105,9 @@ bar {
         active_workspace #ffff00 #00ff00 #7c7c7c
     }
 }
+
+input type:touchpad {
+  tap enabled
+  natural_scroll disabled
+}
+

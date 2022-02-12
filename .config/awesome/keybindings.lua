@@ -42,7 +42,9 @@ keybindings.globalkeys = gears.table.join(
     awful.key({ config.modkey, config.altkey }, "1", function () util.run_once("setxkbmap us") end),
     awful.key({ config.modkey, config.altkey }, "2", function () util.run_once("setxkbmap de") end),
     -- Program Shortcuts
-    awful.key({ config.modkey,           }, "Return", function () util.run_once(config.terminal) end),
+    awful.key({ config.modkey,           }, "Return", function () 
+            awful.spawn(config.terminal)
+        end),
     awful.key({ config.modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     -- Prompt

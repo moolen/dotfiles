@@ -1,6 +1,6 @@
 # Vars
 HISTFILE=~/.zsh_history
-SAVEHIST=10000 
+SAVEHIST=10000
 setopt inc_append_history
 setopt share_history
 

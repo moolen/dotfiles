@@ -1,4 +1,4 @@
-command=/usr/lib/i3blocks/$BLOCK_NAME
+command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=none
 

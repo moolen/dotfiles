@@ -1,0 +1,12 @@
+[commands.swipe.three]
+up = ""
+down = ""
+left = ""
+right = ""
+
+[commands.swipe.four]
+up = ""
+down = ""
+left = "bspc desktop -f prev"
+right = "bspc desktop -f next"
+
